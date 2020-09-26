@@ -63,10 +63,20 @@
   box-shadow: 0px 0px 10px black;
 }
 
+.product{
+  width: 200px;
+  box-shadow: 0px 0px 5px black;
+  margin: 30px auto;
+}
 
-
-
-
+.params{
+  box-shadow: 0px 3px 3px black;
+  padding: 10px;
+}
+.product img{
+  width: 200px;
+  object-fit: cover;
+}
 
 
 

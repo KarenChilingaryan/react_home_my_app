@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-
+import Product from './lesson-4/Product'
 function Header() {
   return (
       <header className="App-header">
@@ -42,6 +42,8 @@ function App() {
       <div className="container">
         <Image />
         <Button />
+
+        <Product name="Mercedes" price="50000$" description="2018, 20000 km, Բենզին" />
       </div>
     </div>
   );
