@@ -78,7 +78,18 @@
   object-fit: cover;
 }
 
-
+.changePrice {
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  background-color: #282c34;
+  color: white;
+}
+.changePrice:hover{
+  border: 1px solid blue;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px blue;
+}
 
 
 
