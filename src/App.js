@@ -1,52 +1,39 @@
 import React from 'react';
 import './App.css';
-import Product from './lesson-4/Product'
-function Header() {
-  return (
-      <header className="App-header">
-        <span className="header-page">Home</span>
-        <span className="header-page">Country</span>
-        <span className="header-page">City</span>
-        <span className="header-page">Contact</span>
-        <span className="header-page">About</span>
-      </header>
-  )
-}
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import './demo/lesson-5';
+// import Product from './demo/Product';
+// import Counter from './demo/Counter';
+// import ToDo from './components/ToDo';
+import ToDo from './components/ToDo';
 
-function Button() {
-  return (
-      <button className="button">BUTTON</button>
-  );
-}
-
-const Image = () => (
-    <div className="image">
-      <img src="https://i.ytimg.com/vi/6NVCKeiqvtY/maxresdefault.jpg" alt=""/>
-      <img src="https://i.ytimg.com/vi/d143Bd0howo/maxresdefault.jpg" alt=""/>
-      <img src="https://ak7.picdn.net/shutterstock/videos/22336627/thumb/1.jpg" alt=""/>
-      <img src="https://i.ytimg.com/vi/x30YOmfeVTE/maxresdefault.jpg" alt=""/>
-      <img src="https://i.ytimg.com/vi/q64jlLL8hIg/maxresdefault.jpg" alt=""/>
-      <img src="https://i.ytimg.com/vi/6NVCKeiqvtY/maxresdefault.jpg" alt=""/>
-      <img src="https://i.ytimg.com/vi/d143Bd0howo/maxresdefault.jpg" alt=""/>
-      <img src="https://ak7.picdn.net/shutterstock/videos/22336627/thumb/1.jpg" alt=""/>
-      <img src="https://i.ytimg.com/vi/x30YOmfeVTE/maxresdefault.jpg" alt=""/>
-      <img src="https://i.ytimg.com/vi/q64jlLL8hIg/maxresdefault.jpg" alt=""/>
-    </div>
-)
 
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <div className="container">
-        <Image />
-        <Button />
+    // const surname = 'Smith';
 
-        <Product name="Mercedes" price="50000$" description="2018, 20000 km, Բենզին" />
-      </div>
-    </div>
-  );
+    return (
+        <div className="App block container">
+            {/*     <Product
+    name={'banabas'}
+    price='1$'
+    rate = {490}
+    description='Fresh bananas from Ecuador'
+    /> */}
+
+            {/*    <Counter
+   defaultValue ={15}
+   name='Counter'
+   /> */}
+
+            {/* <A text='Hello!' initialCount = {0}/> */}
+
+              <ToDo />
+
+            {/*<BootstrapDemo />*/}
+        </div>
+
+    );
 }
 
 export default App;

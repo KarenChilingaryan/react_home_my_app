@@ -4,19 +4,23 @@ class Price extends Component{
     constructor (props){
         super(props)
         this.state = {
-            price: props.price
+            price: props.price,
+            rate: 487
         }
     }
 
     changePrice = () => {
         let count = this.state.price;
+        const rate = this.state.rate;
         if (this.state.price.search("֏") <= 0){
+            count = count.slice(0, count.length-1) * rate + "֏"
             this.setState({
-                price: count.slice(0, count.length-1) * 487 + "֏"
+                price: count
             })
         }else {
+            count = count.slice(0, count.length-1)/rate + "$"
             this.setState({
-                price: count.slice(0, count.length-1)/487 + "$"
+                price: count
             })
         }
 
