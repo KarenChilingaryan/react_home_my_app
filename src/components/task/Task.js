@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styles from './taskStyle.module.css';
-import {Button, Card, Col, FormControl, InputGroup} from "react-bootstrap";
+import {Button, Card, FormControl, InputGroup} from "react-bootstrap";
 import {faEdit, faPen, faTrash, faWindowClose} from "@fortawesome/free-solid-svg-icons";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

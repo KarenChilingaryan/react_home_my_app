@@ -4,4 +4,14 @@
 .input{
     margin-bottom: 10px;
 }
-
+.deleteAll{
+    margin: 0 auto;
+}
+.dropdown{
+    max-height: 200px;
+    overflow: scroll;
+}
+.selectedDrop{
+    background-color: #007bff;
+    color: white;
+}
