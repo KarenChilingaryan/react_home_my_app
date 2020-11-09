@@ -3,10 +3,6 @@ import Task from '../task/Task';
 import idGenerator from '../../helpers/idGenerator';
 import styles from './todoStyle.module.css'
 import {Container, Row, Col, InputGroup, FormControl, Button, Card} from "react-bootstrap";
-
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit, faPen, faTrash, faWindowClose} from "@fortawesome/free-solid-svg-icons";
-
 class ToDo extends Component {
     state = {
         tasks: [],
@@ -15,21 +11,22 @@ class ToDo extends Component {
         updateInput: '',
         checkboxFlag: false
     };
+
+
     handleInputChange = (event) => {
         this.setState(
             {
                 inputValue: event.target.value
             }
         )
-    }
-
+    };
     handleKeyDown = (event) => {
         if (event.keyCode ===13){
             this.addTask()
         }
-    }
+    };
     addTask = () => {
-        const {inputValue} = this.state
+        const {inputValue} = this.state;
         if (!inputValue.trim()){
             return
         }
@@ -38,23 +35,24 @@ class ToDo extends Component {
             checked: false,
             _id: idGenerator()
         };
-        const tasks = [newTask, ...this.state.tasks]
+        const tasks = [newTask, ...this.state.tasks];
         this.setState(
             {
                 tasks: tasks,
                 inputValue: ''
             }
         )
-    }
+    };
 
     removeTask = (_id) => {
-        const newTasks = this.state.tasks.filter((m)=> m._id !== _id)
+        const newTasks = this.state.tasks.filter((m)=> m._id !== _id);
         this.setState(
             {
                 tasks: newTasks,
             }
         )
-    }
+    };
+
 
     updateTask = (_id) => {
         if (_id === this.state.updateTaskId){
@@ -72,8 +70,7 @@ class ToDo extends Component {
                 }
             )
         }
-    }
-
+    };
     updateTaskText = (_id) => {
         const {updateInput} = this.state;
         if (!updateInput.trim()){
@@ -82,7 +79,7 @@ class ToDo extends Component {
         const newTasks = this.state.tasks;
         for(let i = 0; i<newTasks.length; i++) {
             if (_id === newTasks[i]._id){
-                console.log(newTasks[i].text)
+                console.log(newTasks[i].text);
                 newTasks[i].text =  updateInput;
             }
         }
@@ -94,22 +91,19 @@ class ToDo extends Component {
                 updateInput: ''
             }
         )
-    }
+    };
     handleUpdateInputChange = (event) => {
         this.setState(
             {
                 updateInput: event.target.value
             }
         )
-    }
-    handleUpdateKeyDown = (event,_id) => {
-        if (event.keyCode ===13){
-            this.updateTaskText(_id)
-        }
-    }
+    };
+
+
 
     deleteTasks = (_id, event) => {
-        const newTasks = this.state.tasks;
+        const newTasks = [...this.state.tasks];
         let newCheckboxFlag = false;
         for (let i = 0; i < newTasks.length;i++){
             if (newTasks[i]._id === _id){
@@ -122,16 +116,18 @@ class ToDo extends Component {
         this.setState({
             tasks: newTasks,
             checkboxFlag: newCheckboxFlag
-        })
-    }
+        });
+    };
     deleteAll = () => {
-        let newTasks = this.state.tasks;
+        let newTasks = [...this.state.tasks];
         newTasks = newTasks.filter((m) => m.checked === false);
         this.setState({
             tasks: newTasks,
             checkboxFlag: false
         })
-    }
+    };
+
+
     render() {
         const inputValue = this.state.inputValue;
         const updateInput = this.state.updateInput;
@@ -139,72 +135,20 @@ class ToDo extends Component {
         const tasks = this.state.tasks.map((task, i)=>{
             return (
                 <Col key={i} xs={12} sm={6} md={4} lg={3} xl={2}>
-                    <Card className={styles.task}>
-                        <Card.Body>
-                            <Card.Title>{task.text.length >10 ? task.text.slice(0,10)+'...': task.text}</Card.Title>
-                            <Card.Text>
-                                {task.text}
-                            </Card.Text>
-                            {
-                                task._id === this.state.updateTaskId?
-                                <InputGroup className="mb-3">
-                                    <FormControl
-                                        placeholder="update"
-                                        aria-label="update"
-                                        aria-describedby="basic-addon2"
-                                        onChange={this.handleUpdateInputChange}
-                                        onKeyDown={(event) => {
-                                            this.handleUpdateKeyDown(event, task._id)
-                                        }}
-                                        value={updateInput}
-                                    />
-                                    <InputGroup.Append>
-                                        <Button variant="warning"
-                                                onClick={
-                                                    () => {
-                                                        this.updateTaskText(task._id)
-                                                    }
-                                                }
-                                        >
-                                            <FontAwesomeIcon icon={faPen}/>
-                                        </Button>
-                                    </InputGroup.Append>
-                                </InputGroup> : ''
-                            }
-
-                            <Button variant="warning" className={styles.actionButton}
-                                    onClick={() => {
-                                        this.updateTask(task._id)
-                                    }}
-                            >
-                                {
-                                    task._id !== this.state.updateTaskId ?
-                                        <FontAwesomeIcon icon={faEdit}/> :
-                                        <FontAwesomeIcon icon={faWindowClose}/>
-                                }
-                            </Button>
-                            <Button variant="danger" className={styles.actionButton}
-                                    onClick={() => {
-                                        this.removeTask(task._id)
-                                    }}
-                            >
-                                <FontAwesomeIcon icon={faTrash}/>
-                            </Button>
-                            <InputGroup className={'mb-3 ' + styles.checkbox}>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Checkbox aria-label="Checkbox"
-                                                         checked={task.checked}
-                                    onChange={(event) => {
-                                        this.deleteTasks(task._id, event)
-                                    }}/>
-                                </InputGroup.Prepend>
-                            </InputGroup>
-                        </Card.Body>
-                    </Card>
-
+                   <Task
+                       data={task}
+                       removeTask = {this.removeTask}
+                       deleteTasks = {this.deleteTasks}
+                       updateTask = {this.updateTask}
+                       updateTaskText = {this.updateTaskText}
+                       handleUpdateInputChange = {this.handleUpdateInputChange}
+                       updateInput = {updateInput}
+                       updateTaskId = {this.state.updateTaskId}
+                   />
                 </Col>
             )
         });
+
         return (
             <div className={styles.todo}>
                 <Container>

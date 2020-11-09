@@ -14,3 +14,18 @@
 .selected{
     color: red;
 }
+
+.actionButton{
+    margin: 5px;
+}
+.task{
+    margin: 10px auto;
+}
+
+.selected{
+    border: 1px solid red;
+}
+.checkbox{
+    margin: 0 auto !important;
+    width: 40px !important;
+}
