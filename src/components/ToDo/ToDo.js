@@ -138,7 +138,7 @@ class ToDo extends Component {
         })
     }
     lastDropdown = (key) => {
-        this.foo(key,'last')
+        this.dropChecked(key,'last')
         this.setState({
             lastDrop: key
         })
