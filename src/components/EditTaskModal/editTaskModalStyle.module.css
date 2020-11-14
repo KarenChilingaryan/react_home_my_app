@@ -1,0 +1,10 @@
+.input{
+    width: 100%;
+    border: 1px solid #007bff;
+    border-radius: 2px;
+    outline-color: #007bff;
+}
+
+.body{
+    padding: 1px;
+}
