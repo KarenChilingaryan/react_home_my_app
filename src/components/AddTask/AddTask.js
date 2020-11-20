@@ -18,7 +18,10 @@ class AddTask extends Component{
         if (!inputValue.trim()) {
             return;
         }
-        this.props.onAdd(inputValue)
+        const task = {
+            title: inputValue
+        }
+        this.props.onAdd(task)
 
         this.setState({
             inputValue: ''

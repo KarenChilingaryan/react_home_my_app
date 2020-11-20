@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {Button, Modal} from "react-bootstrap";
-import styles from './EditTaskModalStyle.module.css'
+import styles from './EditTaskModalStyle.module.css';
+import PropTypes from 'prop-types';
 
 class EditTaskModal extends PureComponent{
     constructor(props){
@@ -11,7 +12,7 @@ class EditTaskModal extends PureComponent{
 
     handleChange = (event) => {
         this.setState({
-            text: event.target.value
+            title: event.target.value
         })
     };
 
@@ -23,7 +24,7 @@ class EditTaskModal extends PureComponent{
 
     editSave = () => {
         const task = this.state;
-        if (!task.text.trim()){
+        if (!task.title.trim()){
             return
         }
         this.props.onSubmit(task)
@@ -33,7 +34,7 @@ class EditTaskModal extends PureComponent{
     render() {
 
         const {props} = this;
-        const {text} = this.state;
+        const {title} = this.state;
         return(
             <Modal show={true} onHide={props.onClose} centered
                    onKeyUp={this.handleKeyUp}>
@@ -46,7 +47,7 @@ class EditTaskModal extends PureComponent{
                         type="text"
                         className={styles.input}
                         onChange={this.handleChange}
-                        value={text}
+                        value={title}
                     />
                 </Modal.Body>
                 <Modal.Footer>
@@ -64,4 +65,9 @@ class EditTaskModal extends PureComponent{
     }
 }
 
+EditTaskModal.propTypes = {
+    data: PropTypes.object.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
+};
 export default EditTaskModal;

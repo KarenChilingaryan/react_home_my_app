@@ -43,9 +43,9 @@ componentWillUnmount(){
                             type='checkbox' 
                             onClick = {this.handleCheck}
                             />
-                            <Card.Title>{task.text.length >10 ? task.text.slice(0, 10) + '...': task.text}</Card.Title>
+                            <Card.Title>{task.title.length >10 ? task.title.slice(0, 10) + '...': task.title}</Card.Title>
                             <Card.Text>
-                                {task.text}
+                                {task.title}
                             </Card.Text>
                             <Button 
                             variant="warning" 
