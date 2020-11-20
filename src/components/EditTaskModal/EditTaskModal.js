@@ -15,7 +15,7 @@ class EditTaskModal extends PureComponent{
         })
     };
 
-    handleKeyDown = (event)=>{
+    handleKeyUp = (event)=>{
         if (event.keyCode === 13){
             this.editSave()
         }
@@ -35,7 +35,8 @@ class EditTaskModal extends PureComponent{
         const {props} = this;
         const {text} = this.state;
         return(
-            <Modal show={true} onHide={props.onClose} centered>
+            <Modal show={true} onHide={props.onClose} centered
+                   onKeyUp={this.handleKeyUp}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit task</Modal.Title>
                 </Modal.Header>
@@ -45,7 +46,6 @@ class EditTaskModal extends PureComponent{
                         type="text"
                         className={styles.input}
                         onChange={this.handleChange}
-                        onKeyUp={this.handleKeyDown}
                         value={text}
                     />
                 </Modal.Body>

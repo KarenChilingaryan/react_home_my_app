@@ -6,6 +6,7 @@ import styles from './todoStyle.module.css';
 import Confirm from "../Confirm";
 import AddTask from "../AddTask/AddTask";
 import EditTaskModal from "../EditTaskModal/EditTaskModal";
+import {element} from "prop-types";
 
 class ToDo extends PureComponent {
     state = {
@@ -78,13 +79,18 @@ class ToDo extends PureComponent {
     }
 
     editTask = (saveTask) => {
-        const newTasks = this.state.tasks;
-        for (let i=0; i<newTasks.length; i++){
-            if (newTasks[i]._id === saveTask._id){
-                newTasks[i] = saveTask
-            }
-        }
+        const newTasks = [...this.state.tasks];
+        const foundTaskIndex = newTasks.findIndex((task)=>task._id === saveTask._id);
+        newTasks[foundTaskIndex] = saveTask;
 
+        // const newTasks = this.state.tasks;
+        // for (let i=0; i<newTasks.length; i++){
+        //     if (newTasks[i]._id === saveTask._id){
+        //         newTasks[i] = saveTask;
+        //         break;5
+        //     }
+        // }
+        //
         this.setState({
             tasks: newTasks,
             editTask: null
@@ -146,7 +152,7 @@ class ToDo extends PureComponent {
                     !!editTask &&
                     <EditTaskModal
                         onClose={() => this.toggleEdit(null)}
-                        onSubmit={(saveTask) => this.editTask(saveTask)}
+                        onSubmit={this.editTask}
                         data={editTask}
                     />
                 }
