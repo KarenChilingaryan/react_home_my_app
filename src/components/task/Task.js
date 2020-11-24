@@ -3,6 +3,7 @@ import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './taskStyle.module.css';
+import moment from "moment";
 
 
 class Task extends PureComponent{
@@ -27,6 +28,8 @@ componentWillUnmount(){
 
     render() {
         const task = this.props.data;
+        const date = new Date(task.date)
+        const newDate = moment(date.toLocaleDateString()).format('YYYY-MM-DD');
         const {checked} = this.state;
         const {disabled} = this.props;
         const {editChecked} = this.props;
@@ -46,6 +49,9 @@ componentWillUnmount(){
                             <Card.Title>{task.title.length >10 ? task.title.slice(0, 10) + '...': task.title}</Card.Title>
                             <Card.Text>
                                 {task.description}
+                            </Card.Text>
+                            <Card.Text>
+                                {newDate}
                             </Card.Text>
                             <Button 
                             variant="warning" 

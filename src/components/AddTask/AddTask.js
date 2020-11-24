@@ -4,6 +4,7 @@ import {Button, FormControl, InputGroup, Modal} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
+import moment from "moment";
 
 class AddTask extends Component{
     state = {
@@ -20,7 +21,7 @@ class AddTask extends Component{
 
     addTask = () => {
         const { title, description, date } = this.state;
-        const newDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+        const newDate = moment(date.toLocaleDateString()).format('YYYY-MM-DD');
         if (!title.trim() || !description.trim()) {
             return;
         }
@@ -29,6 +30,7 @@ class AddTask extends Component{
             description: description,
             date: newDate
         };
+        console.log(task.date)
         this.props.onAdd(task)
     }
 
