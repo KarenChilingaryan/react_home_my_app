@@ -45,7 +45,7 @@ componentWillUnmount(){
                             />
                             <Card.Title>{task.title.length >10 ? task.title.slice(0, 10) + '...': task.title}</Card.Title>
                             <Card.Text>
-                                {task.title}
+                                {task.description}
                             </Card.Text>
                             <Button 
                             variant="warning" 

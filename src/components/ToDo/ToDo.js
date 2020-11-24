@@ -11,7 +11,8 @@ class ToDo extends PureComponent {
         tasks: [],
         selectedTasks: new Set(),
         showConfirm: false,
-        editTask: null
+        editTask: null,
+        newTaskModal: false
     };
 
     componentDidMount() {
@@ -42,7 +43,7 @@ class ToDo extends PureComponent {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: body
+            body: body,
         })
             .then((res)=> res.json())
             .then(response => {
@@ -53,6 +54,7 @@ class ToDo extends PureComponent {
                 this.setState({
                     tasks: tasks,
                 });
+                this.toggleNewTask()
             })
             .catch((error)=>{
                 console.log(error)
@@ -166,19 +168,15 @@ class ToDo extends PureComponent {
             .catch((error)=>{
                 console.log(error)
             });
-
-        // const newTasks = this.state.tasks;
-        // for (let i=0; i<newTasks.length; i++){
-        //     if (newTasks[i]._id === saveTask._id){
-        //         newTasks[i] = saveTask;
-        //         break;5
-        //     }
-        // }
-        //
     };
 
+    toggleNewTask = () => {
+        this.setState({
+            newTaskModal: !this.state.newTaskModal
+        })
+    };
     render() {
-        const { tasks, selectedTasks, editTask, showConfirm} = this.state;
+        const { tasks, selectedTasks, editTask, showConfirm, newTaskModal} = this.state;
         const tasksArray = tasks.map((task) => {
             return (
                 <Col key={task._id} xs={12} sm={6} md={4} lg={3} xl={2}>
@@ -198,26 +196,25 @@ class ToDo extends PureComponent {
             <div className={styles.toDo}>
                 <Container>
                     <Row className='justify-content-center'>
-                        <Col sm={10} xs={12} md={8} lg={6}>
-                            <AddTask
-                                onAdd={this.addTask}
+                        <Col sm={6} xs={6} md={4} lg={3}>
+                            <Button
+                                variant="outline-primary"
+                                onClick={this.toggleNewTask}
                                 disabled={!!selectedTasks.size}
-                            />
+                            >
+                                Add
+                            </Button>
+                            <Button
+                                variant="outline-danger"
+                                onClick={this.toggleConfirm}
+                                disabled = {!selectedTasks.size}
+                            >
+                                Remove selected
+                            </Button>
                         </Col>
                     </Row>
                     <Row>
                         {tasksArray}
-                    </Row>
-                    <Row className='justify-content-center'>
-                        <Col xs={4} className={styles.buttonBlock}>
-                        <Button
-                            variant="outline-danger"
-                            onClick={this.toggleConfirm}
-                            disabled = {!selectedTasks.size}
-                        >
-                            Remove selected
-                        </Button>
-                        </Col>
                     </Row>
                 </Container>
                 {
@@ -234,6 +231,14 @@ class ToDo extends PureComponent {
                         onClose={() => this.toggleEdit(null)}
                         onSubmit={this.editTask}
                         data={editTask}
+                    />
+                }
+
+                {
+                    newTaskModal &&
+                    <AddTask
+                        onAdd={this.addTask}
+                        onClose = {this.toggleNewTask}
                     />
                 }
             </div>

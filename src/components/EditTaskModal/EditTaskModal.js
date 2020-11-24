@@ -8,6 +8,7 @@ class EditTaskModal extends PureComponent{
         super(props)
 
         this.state = {...props.data}
+        console.log(this.state)
     }
 
     handleChange = (event) => {
@@ -67,7 +68,7 @@ class EditTaskModal extends PureComponent{
 
 EditTaskModal.propTypes = {
     data: PropTypes.object.isRequired,
-    onSave: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
 };
 export default EditTaskModal;
