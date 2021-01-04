@@ -231,6 +231,7 @@ class ToDo extends PureComponent {
                         onClose={() => this.toggleEdit(null)}
                         onSubmit={this.editTask}
                         data={editTask}
+                        disabled = {!!selectedTasks.size}
                     />
                 }
 

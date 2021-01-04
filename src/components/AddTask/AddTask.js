@@ -4,13 +4,12 @@ import {Button, FormControl, InputGroup, Modal} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
-import moment from "moment";
 
 class AddTask extends Component{
     state = {
         title: '',
         description: '',
-        date: new Date()
+        date: (new Date())
     };
 
     handleChange = (event) => {
@@ -21,7 +20,7 @@ class AddTask extends Component{
 
     addTask = () => {
         const { title, description, date } = this.state;
-        const newDate = moment(date.toLocaleDateString()).format('YYYY-MM-DD');
+        const   newDate = date.toISOString().slice(0, 10);
         if (!title.trim() || !description.trim()) {
             return;
         }
@@ -83,7 +82,9 @@ class AddTask extends Component{
                         <DatePicker
                             className={styles.description}
                             selected={date}
-                            onChange={this.handleChangeDate} />
+                            onChange={this.handleChangeDate}
+                            minDate={new Date()}
+                        />
                     </InputGroup>
                 </Modal.Body>
                 <Modal.Footer>
